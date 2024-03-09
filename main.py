@@ -1,1 +1,14 @@
-
+import requests;from flask import Flask,jsonify
+sk=Flask(__name__)
+@sk.route('/UPI=<KK>')
+def sanchit(KK):
+	head = {'x-hs-request-id':'4f0a68-7324f1-78ac40-227721', 'x-hs-usertoken':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6IiIsImF1ZCI6InVtX2FjY2VzcyIsImV4cCI6MTcwOTIyNTA4NiwiaWF0IjoxNzA5MTM4Njg2LCJpc3MiOiJUUyIsImp0aSI6IjI3MTg4OGRjYWIzMDRkNDg4MzBmODQ5MGE4YzFmMjkyIiwic3ViIjoie1wiaElkXCI6XCI0YTI5MzYzZGRmNTc0ZDg1OTkzYmE3OGVmM2Q0N2E2ZVwiLFwicElkXCI6XCI5NWFlMmZiMzk5MmI0MzczYWFjNDE3NjVhNzczYmQ4NFwiLFwibmFtZVwiOlwiWW91XCIsXCJwaG9uZVwiOlwiNjI2MzA3OTk0NVwiLFwiaXBcIjpcIjE3MS42MC4xOTMuNzBcIixcImNvdW50cnlDb2RlXCI6XCJpblwiLFwiY3VzdG9tZXJUeXBlXCI6XCJudVwiLFwidHlwZVwiOlwicGhvbmVcIixcImlzRW1haWxWZXJpZmllZFwiOmZhbHNlLFwiaXNQaG9uZVZlcmlmaWVkXCI6dHJ1ZSxcImRldmljZUlkXCI6XCJlOTdiYS00YmRmNGYtMmM3OTQ0LTRjOTEzY1wiLFwicHJvZmlsZVwiOlwiQURVTFRcIixcInZlcnNpb25cIjpcInYyXCIsXCJzdWJzY3JpcHRpb25zXCI6e1wiaW5cIjp7fX0sXCJlbnRcIjpcIkNxa0JDZ1VLQXdvQkFCS2ZBUklIWVc1a2NtOXBaQklEYVc5ekVnbGhibVJ5YjJsa2RIWVNCbVpwY21WMGRoSUhZWEJ3YkdWMGRoSUVjbTlyZFJJRGQyVmlFZ1J0ZDJWaUVnZDBhWHBsYm5SMkVnVjNaV0p2Y3hJR2FtbHZjM1JpRWdwamFISnZiV1ZqWVhOMEVnUjBkbTl6RWdSd1kzUjJFZ05xYVc4U0IycHBieTFzZVdZU0JIaGliM2dTQzNCc1lYbHpkR0YwYVc5dUdnSnpaQ0lEYzJSeUtnWnpkR1Z5Wlc5WUFRb2lDaG9LRGhJRk5UVTRNellTQlRZME1EUTVDZ2dpQm1acGNtVjBkaElFT0dSWUFRb0xFZ2tJQ2pnQlVPQURXQUVTQmdnQklBRXdBUT09XCIsXCJpc3N1ZWRBdFwiOjE3MDkxMzg2ODY4MDEsXCJkcGlkXCI6XCI5NWFlMmZiMzk5MmI0MzczYWFjNDE3NjVhNzczYmQ4NFwiLFwic3RcIjoxLFwiZGF0YVwiOlwiQ2dRSUFCSUFDaElJQUNJT2dBRWxpQUVCa0FHZHZ1R1dyaTBLQkFnQU9nQUtCQWdBUWdBS0JBZ0FNZ0FLYWdnQUttWUtBZ29BQ2hFS0FnZ0NFZ1VLQTJocGJoaW8vOG4vQlFvbkNnY0lBUlVBQUFCQUVnb0tBMmhwYmlVeTVYOC9FZ29LQTJWdVp5VkljZFk1R0tqL3lmOEZDaEVLQWdnREVnVUtBMmhwYmhpby84bi9CUW9SQ2dJSUJCSUZDZ05vYVc0WXFQL0ovd1U9XCJ9IiwidmVyc2lvbiI6IjFfMCJ9.s9d-3PjlHmSDRaSNHg2j4Mo6fjxtjZCpL8tdFfUHOaA','user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1'}
+	xx = {"paymentMode":"UPI","pgName":"razorUPI","paymentProcessor":"razorS2SCollect","subscriptionPack":"HotstarSuper.IN.3Month.299","returnUrl":"https://www.hotstar.com/in/payment/status?family=HotstarSuper&pack_id=HotstarSuper.IN.3Month.299&transaction_id=%7B%7BtransactionId%7D%7D&prevpageurl=%2Fin%2Fsettings","abTags":["PayX","PayXWeb","V2_FLOW"],"bankCode":"","cardBIN":"","fname":"","lname":"","latitude":"","longitude":"","payload":{"vpa": KK},"paymentHash":"","pgParams":{"versionCode":"-1","redirectURL":"https://www.hotstar.com/in/payment/status?family=HotstarSuper&pack_id=HotstarSuper.IN.3Month.299&transaction_id={{transactionId}}","mobileNumber":"7428723247"},"phoneNumber":"","referralCode":""}
+	url = requests.post(f"https://www.hotstar.com/api/internal/bff/gringotts/v4/web/payment/initiate", headers=head, json=xx).json()
+	if url.get('message') == 'TRANSACTION_INITIATED_SUCCESSFULLY':
+		return jsonify(Sanchit="Done Sended")
+	else:
+		return jsonify(Sanchit="Not Sended")
+		
+if __name__ == '__main__':
+	sk.run(host='0.0.0.0', port=6978, debug=True)
